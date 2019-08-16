@@ -440,6 +440,11 @@
         removeErrorClass.call(this, $(this), 'error unvalid empty', isErrorOnParent);
       })
 
+      // 允许外部手动触发 `form:validate` 事件进行表单验证，但是这里仅仅是验证，主要针对多个表格（TAB 结构）切换的情况
+      $form.on("form:validate", function (e) {
+        validateForm.call(this, getItems, method, klass, isErrorOnParent, $form, identifier);
+      })
+
       // 提交校验
       $form.on('submit', function(e){
 
